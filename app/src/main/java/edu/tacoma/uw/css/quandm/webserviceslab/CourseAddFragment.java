@@ -3,10 +3,19 @@ package edu.tacoma.uw.css.quandm.webserviceslab;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.net.URLEncoder;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -18,16 +27,15 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class CourseAddFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private final static String COURSE_ADD_URL
+            = "http://cssgate.insttech.washington.edu/~quandm/addCourse.php?";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private EditText mCourseIdEditText;
+    private EditText mCourseShortDescEditText;
+    private EditText mCourseLongDescEditText;
+    private EditText mCoursePrereqsEditText;
 
-    private OnFragmentInteractionListener mListener;
+    private CourseAddListener mListener;
 
     public CourseAddFragment() {
         // Required empty public constructor
@@ -45,8 +53,7 @@ public class CourseAddFragment extends Fragment {
     public static CourseAddFragment newInstance(String param1, String param2) {
         CourseAddFragment fragment = new CourseAddFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,41 +61,88 @@ public class CourseAddFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_course_add, container, false);
+
+        mCourseIdEditText = (EditText) v.findViewById(R.id.edit_courseid_);
+        mCourseShortDescEditText = (EditText) v.findViewById(R.id.edit_short_desc);
+        mCourseLongDescEditText = (EditText) v.findViewById(R.id.edit_long_desc);
+        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.edit_prereqs);
+        FloatingActionButton floatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fab);
+        floatingActionButton.hide();
+
+        Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = buildCourseURL(v);
+                mListener.addCourse(url);
+            }
+        });
+
+
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        super.onAttach(context);
+        if (context instanceof CourseAddListener) {
+            mListener = (CourseAddListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement CourseAddListener");
         }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    private String buildCourseURL(View v) {
+
+        StringBuilder sb = new StringBuilder(COURSE_ADD_URL);
+
+        try {
+
+            String courseId = mCourseIdEditText.getText().toString();
+            sb.append("id=");
+            sb.append(URLEncoder.encode(courseId, "UTF-8"));
+
+
+            String courseShortDesc = mCourseShortDescEditText.getText().toString();
+            sb.append("&shortDesc=");
+            sb.append(URLEncoder.encode(courseShortDesc, "UTF-8"));
+
+
+            String courseLongDesc = mCourseLongDescEditText.getText().toString();
+            sb.append("&longDesc=");
+            sb.append(URLEncoder.encode(courseLongDesc, "UTF-8"));
+
+            String coursePrereqs = mCoursePrereqsEditText.getText().toString();
+            sb.append("&prereqs=");
+            sb.append(URLEncoder.encode(coursePrereqs, "UTF-8"));
+
+            Log.i(TAG, sb.toString());
+
+        }
+        catch(Exception e) {
+            Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                    .show();
+        }
+        return sb.toString();
     }
 
     /**
@@ -104,5 +158,9 @@ public class CourseAddFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public interface CourseAddListener {
+        public void addCourse(String url);
     }
 }
