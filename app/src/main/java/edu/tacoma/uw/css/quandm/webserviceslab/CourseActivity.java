@@ -20,6 +20,12 @@ public class CourseActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_course);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // add the fragment course list
+        CourseListFragment courseListFragment = new CourseListFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, courseListFragment)
+                .commit();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +61,6 @@ public class CourseActivity extends AppCompatActivity implements
 
     @Override
     public void onListFragmentInteraction(Course item) {
-        
+
     }
 }
