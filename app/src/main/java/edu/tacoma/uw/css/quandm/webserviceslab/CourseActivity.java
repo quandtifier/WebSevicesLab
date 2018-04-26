@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CourseActivity extends AppCompatActivity {
+import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
+
+public class CourseActivity extends AppCompatActivity implements
+        CourseListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +51,10 @@ public class CourseActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(Course item) {
+        
     }
 }

@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.tacoma.uw.css.quandm.webserviceslab.dummy.DummyContent;
-import edu.tacoma.uw.css.quandm.webserviceslab.dummy.DummyContent.DummyItem;
 
 import java.util.List;
+
+import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
 
 /**
  * A fragment representing a list of Items.
@@ -23,11 +23,12 @@ import java.util.List;
  */
 public class CourseListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private List<Course> mCourseList;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,7 +70,7 @@ public class CourseListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCourseRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
         }
         return view;
     }
@@ -103,7 +104,7 @@ public class CourseListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
+        void onListFragmentInteraction(Course item);
     }
 }
