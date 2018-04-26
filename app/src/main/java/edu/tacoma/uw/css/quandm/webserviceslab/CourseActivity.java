@@ -1,5 +1,6 @@
 package edu.tacoma.uw.css.quandm.webserviceslab;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +13,8 @@ import android.view.MenuItem;
 import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
 
 public class CourseActivity extends AppCompatActivity implements
-        CourseListFragment.OnListFragmentInteractionListener {
+        CourseListFragment.OnListFragmentInteractionListener,
+        CourseDetailFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,19 @@ public class CourseActivity extends AppCompatActivity implements
 
     @Override
     public void onListFragmentInteraction(Course item) {
+        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, item);
+        courseDetailFragment.setArguments(args);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, courseDetailFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        
     }
 }

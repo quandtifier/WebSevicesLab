@@ -15,13 +15,13 @@ public class Course implements Serializable {
     public static final String PRE_REQS = "prereqs";
 
 
-    private String mCourseID;
+    private String mCourseId;
     private String mShortDescription;
     private String mLongDescription;
     private String mPrereqs;
 
-    public Course (String theCourseID, String theShortDescription, String theLongDescription, String thePrereqs) {
-        mCourseID = theCourseID;
+    public Course (String theCourseId, String theShortDescription, String theLongDescription, String thePrereqs) {
+        mCourseId = theCourseId;
         mShortDescription = theShortDescription;
         mLongDescription = theLongDescription;
         mPrereqs = thePrereqs;
@@ -44,35 +44,35 @@ public class Course implements Serializable {
 
         return courseList;
     }
-    public String getmCourseID() {
-        return mCourseID;
+    public String getCourseId() {
+        return mCourseId;
     }
 
-    public String getmShortDescription() {
+    public String getShortDescription() {
         return mShortDescription;
     }
 
-    public String getmLongDescription() {
+    public String getLongDescription() {
         return mLongDescription;
     }
 
-    public String getmPrereqs() {
+    public String getPrereqs() {
         return mPrereqs;
     }
 
-    public void setmCourseID(String mCourseID) {
-        this.mCourseID = mCourseID;
+    public void setCourseID(String mCourseID) {
+        this.mCourseId = mCourseID;
     }
 
-    public void setmShortDescription(String mShortDescription) {
+    public void setShortDescription(String mShortDescription) {
         this.mShortDescription = mShortDescription;
     }
 
-    public void setmLongDescription(String mLongDescription) {
+    public void setLongDescription(String mLongDescription) {
         this.mLongDescription = mLongDescription;
     }
 
-    public void setmPrereqs(String mPrereqs) {
+    public void setPrereqs(String mPrereqs) {
         this.mPrereqs = mPrereqs;
     }
 }

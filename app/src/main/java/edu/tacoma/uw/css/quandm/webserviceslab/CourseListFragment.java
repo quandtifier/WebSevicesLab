@@ -44,6 +44,8 @@ public class CourseListFragment extends Fragment {
     private List<Course> mCourseList;
     private RecyclerView mRecyclerView;
 
+
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
