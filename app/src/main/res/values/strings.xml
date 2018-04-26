@@ -4,4 +4,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_courseid__tip">Enter Course Id (Ex: TCSS450)</string>
+    <string name="enter_short_desc">Enter Course Short Description (Ex:\nMobile App Programming)</string>
+    <string name="enter_long_desc">Enter Course Long Description</string>
+    <string name="enter_prereqs">Enter Prerequisites</string>
+
 </resources>

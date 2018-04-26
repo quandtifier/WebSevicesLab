@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CourseAddFragment">
+
+
+    <EditText
+        android:id="@+id/edit_courseid_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_courseid__tip"
+        android:text="@+id/enter_courseid" />
+
+    <EditText
+        android:id="@+id/edit_long_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_short_desc"
+        android:text="@+id/enter_long_desc" />
+
+    <EditText
+        android:id="@+id/edit_short_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_long_desc"
+        android:text="@+id/enter_short_desc" />
+
+    <EditText
+        android:id="@+id/edit_prereqs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_prereqs"
+        android:text="@+id/enter_prereqs" />
+</LinearLayout>

@@ -76,6 +76,6 @@ public class CourseActivity extends AppCompatActivity implements
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        
+
     }
 }
