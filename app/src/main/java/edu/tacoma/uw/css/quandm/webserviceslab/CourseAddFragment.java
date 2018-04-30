@@ -29,7 +29,8 @@ import static android.support.constraint.Constraints.TAG;
 public class CourseAddFragment extends Fragment {
     private final static String COURSE_ADD_DEBUG = "CourseAddFragment: ";
     private final static String COURSE_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~quandm/Android/addCourse.php?";
+            //= "http://cssgate.insttech.washington.edu/~quandm/Android/addCourse.php?";
+            = "http://quandt.000webhostapp.com/Android/addCourse.php?";
 
     private EditText mCourseIdEditText;
     private EditText mCourseShortDescEditText;
