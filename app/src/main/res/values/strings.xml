@@ -8,5 +8,6 @@
     <string name="enter_short_desc">Enter Course Short Description (Ex:\nMobile App Programming)</string>
     <string name="enter_long_desc">Enter Course Long Description</string>
     <string name="enter_prereqs">Enter Prerequisites</string>
+    <string name="btn_add_course">ADD COURSE</string>
 
 </resources>

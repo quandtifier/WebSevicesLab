@@ -3,10 +3,12 @@ package edu.tacoma.uw.css.quandm.webserviceslab;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
@@ -21,16 +23,11 @@ import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
  * create an instance of this fragment.
  */
 public class CourseDetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
+
 
     public final static String COURSE_ITEM_SELECTED = "course_selected";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private TextView mCourseIdTextView;
     private TextView mCourseShortDescTextView ;
@@ -51,12 +48,11 @@ public class CourseDetailFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment CourseDetailFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static CourseDetailFragment newInstance(String param1, String param2) {
         CourseDetailFragment fragment = new CourseDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,10 +60,7 @@ public class CourseDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -79,6 +72,9 @@ public class CourseDetailFragment extends Fragment {
         mCourseShortDescTextView = (TextView) view.findViewById(R.id.course_short_desc);
         mCourseLongDescTextView = (TextView) view.findViewById(R.id.course_long_desc);
         mCoursePrereqsTextView = (TextView) view.findViewById(R.id.course_prereqs);
+        FloatingActionButton floatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fab);
+        floatingActionButton.show();
 
         return view;
 

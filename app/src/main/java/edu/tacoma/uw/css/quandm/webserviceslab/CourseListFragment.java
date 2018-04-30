@@ -3,6 +3,7 @@ package edu.tacoma.uw.css.quandm.webserviceslab;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,8 +54,7 @@ public class CourseListFragment extends Fragment {
     public CourseListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+
     public static CourseListFragment newInstance(int columnCount) {
         CourseListFragment fragment = new CourseListFragment();
         Bundle args = new Bundle();
@@ -89,6 +89,10 @@ public class CourseListFragment extends Fragment {
             CourseAsyncTask courseAsyncTask = new CourseAsyncTask();
             courseAsyncTask.execute(new String[]{COURSE_URL});
         }
+
+        FloatingActionButton floatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fab);
+        floatingActionButton.show();
         return view;
     }
 

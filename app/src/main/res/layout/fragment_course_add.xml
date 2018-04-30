@@ -34,4 +34,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/enter_prereqs"
         android:text="@+id/enter_prereqs" />
+
+    <Button
+        android:id="@+id/btn_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_course" />
 </LinearLayout>

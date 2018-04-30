@@ -14,7 +14,8 @@ import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
 
 public class CourseActivity extends AppCompatActivity implements
         CourseListFragment.OnListFragmentInteractionListener,
-        CourseDetailFragment.OnFragmentInteractionListener {
+        CourseDetailFragment.OnFragmentInteractionListener,
+        CourseAddFragment.CourseAddListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,11 @@ public class CourseActivity extends AppCompatActivity implements
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                CourseAddFragment courseAddFragment = new CourseAddFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, courseAddFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
@@ -76,6 +80,11 @@ public class CourseActivity extends AppCompatActivity implements
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void addCourse(String url) {
 
     }
 }

@@ -69,7 +69,7 @@ public class CourseAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_course_add, container, false);
 
-        mCourseIdEditText = (EditText) v.findViewById(R.id.edit_courseid_);
+        mCourseIdEditText = (EditText) v.findViewById(R.id.edit_courseid);
         mCourseShortDescEditText = (EditText) v.findViewById(R.id.edit_short_desc);
         mCourseLongDescEditText = (EditText) v.findViewById(R.id.edit_long_desc);
         mCoursePrereqsEditText = (EditText) v.findViewById(R.id.edit_prereqs);
@@ -77,7 +77,7 @@ public class CourseAddFragment extends Fragment {
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.hide();
 
-        Button addCourseButton = (Button) v.findViewById(R.id.btnCourse);
+        Button addCourseButton = (Button) v.findViewById(R.id.btn_course);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
