@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_courseid__tip"
+        android:inputType="text"
         android:text="@+id/enter_courseid" />
 
     <EditText
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_short_desc"
+        android:inputType="text"
         android:text="@+id/enter_long_desc" />
 
     <EditText
@@ -26,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_long_desc"
+        android:inputType="text"
         android:text="@+id/enter_short_desc" />
 
     <EditText
@@ -33,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_prereqs"
+        android:inputType="text"
         android:text="@+id/enter_prereqs" />
 
     <Button

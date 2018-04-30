@@ -27,8 +27,9 @@ import static android.support.constraint.Constraints.TAG;
  * create an instance of this fragment.
  */
 public class CourseAddFragment extends Fragment {
+    private final static String COURSE_ADD_DEBUG = "CourseAddFragment: ";
     private final static String COURSE_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~quandm/addCourse.php?";
+            = "http://cssgate.insttech.washington.edu/~quandm/Android/addCourse.php?";
 
     private EditText mCourseIdEditText;
     private EditText mCourseShortDescEditText;
@@ -45,11 +46,9 @@ public class CourseAddFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment CourseAddFragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static CourseAddFragment newInstance(String param1, String param2) {
         CourseAddFragment fragment = new CourseAddFragment();
         Bundle args = new Bundle();
@@ -142,6 +141,7 @@ public class CourseAddFragment extends Fragment {
             Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
                     .show();
         }
+        Log.v(COURSE_ADD_DEBUG, sb.toString());
         return sb.toString();
     }
 
@@ -156,7 +156,6 @@ public class CourseAddFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
