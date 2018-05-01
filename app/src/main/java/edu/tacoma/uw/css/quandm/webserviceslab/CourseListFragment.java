@@ -180,7 +180,7 @@ public class CourseListFragment extends Fragment {
                 return;
             }
 
-// Everything is good, show the list of courses.
+            // Everything is good, show the list of courses.
             if (!mCourseList.isEmpty()) {
                 mRecyclerView.setAdapter(new MyCourseRecyclerViewAdapter(mCourseList, mListener));
             }
