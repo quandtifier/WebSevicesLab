@@ -39,8 +39,8 @@ public class CourseListFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String COURSE_URL
-            //="http://cssgate.insttech.washington.edu/~quandm/Android/list.php?cmd=courses";
-            ="http://quandt.000webhostapp.com/Android/list.php?cmd=courses";
+            ="http://cssgate.insttech.washington.edu/~quandm/Android/list.php?cmd=courses";
+            //="http://quandt.000webhostapp.com/Android/list.php?cmd=courses";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private List<Course> mCourseList;
