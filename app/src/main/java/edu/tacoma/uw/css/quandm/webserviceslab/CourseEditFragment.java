@@ -73,9 +73,9 @@ public class CourseEditFragment extends Fragment {
 
         mCourseIdTextView = (TextView) v.findViewById(R.id.course_to_edit);
         mCourseIdTextView.setText(getArguments().getString("courseToEdit"));
-        mCourseShortDescEditText = (EditText) v.findViewById(R.id.edit_short_desc);
-        mCourseLongDescEditText = (EditText) v.findViewById(R.id.edit_long_desc);
-        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.edit_prereqs);
+        mCourseShortDescEditText = (EditText) v.findViewById(R.id.change_short_desc);
+        mCourseLongDescEditText = (EditText) v.findViewById(R.id.change_long_desc);
+        mCoursePrereqsEditText = (EditText) v.findViewById(R.id.change_prereqs);
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.hide();
