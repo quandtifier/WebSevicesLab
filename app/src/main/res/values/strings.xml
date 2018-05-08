@@ -9,5 +9,5 @@
     <string name="enter_long_desc">Enter Course Long Description</string>
     <string name="enter_prereqs">Enter Prerequisites</string>
     <string name="btn_add_course">ADD COURSE</string>
-
+    <string name="btn_clear">CLEAR</string>
 </resources>

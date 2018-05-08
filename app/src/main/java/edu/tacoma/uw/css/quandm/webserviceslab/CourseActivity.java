@@ -36,6 +36,8 @@ public class CourseActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_course);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.mipmap.block_chain_icon_round);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         // add the fragment course list
         CourseListFragment courseListFragment = new CourseListFragment();
         getSupportFragmentManager().beginTransaction()
@@ -44,6 +46,7 @@ public class CourseActivity extends AppCompatActivity implements
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageResource(R.mipmap.plus_icon_round);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
