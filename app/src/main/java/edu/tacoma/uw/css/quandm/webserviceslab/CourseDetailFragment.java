@@ -2,16 +2,31 @@ package edu.tacoma.uw.css.quandm.webserviceslab;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -23,7 +38,6 @@ import edu.tacoma.uw.css.quandm.webserviceslab.Course.Course;
  * create an instance of this fragment.
  */
 public class CourseDetailFragment extends Fragment {
-
 
 
     public final static String COURSE_ITEM_SELECTED = "course_selected";
@@ -76,6 +90,16 @@ public class CourseDetailFragment extends Fragment {
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.show();
 
+
+        Button editCourseButton = (Button) view.findViewById(R.id.btn_edit_details);
+
+        editCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("courseDetail","heard onclick");
+                ((CourseActivity)getActivity()).onSelectedEditCourse(mCourseIdTextView.getText().toString());
+            }
+        });
         return view;
 
     }
@@ -89,12 +113,7 @@ public class CourseDetailFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -124,6 +143,9 @@ public class CourseDetailFragment extends Fragment {
         mListener = null;
     }
 
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -135,7 +157,7 @@ public class CourseDetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

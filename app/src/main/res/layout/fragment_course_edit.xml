@@ -4,36 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CourseDetailFragment">
+    tools:context=".CourseAddFragment">
+
 
     <TextView
+        android:id="@+id/course_to_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course_item_id" />
+        style="@style/EditTextStyle" />
 
-    <TextView
+    <EditText
+        android:id="@+id/change_short_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course_short_desc" />
+        android:hint="@string/enter_short_desc"
+        android:inputType="text"
+        style="@style/CourseIdEditTextStyle" />
 
-    <TextView
+    <EditText
+        android:id="@+id/change_long_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course_long_desc" />
+        android:hint="@string/enter_long_desc"
+        android:inputType="text"
+        style="@style/CourseIdEditTextStyle" />
 
-    <TextView
+    <EditText
+        android:id="@+id/change_prereqs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course_prereqs" />
+        android:hint="@string/enter_prereqs"
+        android:inputType="text"
+        style="@style/EditTextStyle" />
 
     <Button
-        android:id="@+id/btn_edit_details"
+        android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/btn_edit_course"
+        android:text="@string/btn_submit"
         style="@style/uwButtonStyle" />
 
+
+
 </LinearLayout>
-
-

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URLEncoder;
@@ -21,25 +22,26 @@ import static android.support.constraint.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CourseAddFragment.OnFragmentInteractionListener} interface
+ * {@link CourseEditFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link CourseAddFragment#newInstance} factory method to
+ * Use the {@link CourseEditFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CourseAddFragment extends Fragment {
-    private final static String COURSE_ADD_DEBUG = "CourseAddFragment: ";
-    private final static String COURSE_ADD_URL
-            = "http://cssgate.insttech.washington.edu/~quandm/Android/addCourse.php?";
-            //= "http://quandt.000webhostapp.com/Android/addCourse.php?";
+public class CourseEditFragment extends Fragment {
 
-    private EditText mCourseIdEditText;
+    private final static String COURSE_EDIT_URL
+            = "http://cssgate.insttech.washington.edu/~quandm/Android/editCourse.php?";
+    //= "http://quandt.000webhostapp.com/Android/editCourse.php?";
+
+    private TextView mCourseIdTextView;
     private EditText mCourseShortDescEditText;
     private EditText mCourseLongDescEditText;
     private EditText mCoursePrereqsEditText;
 
-    private CourseAddListener mListener;
+    private CourseEditListener mListener;
 
-    public CourseAddFragment() {
+
+    public CourseEditFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +49,11 @@ public class CourseAddFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment CourseAddFragment.
+     * @return A new instance of fragment CourseEditFragment.
      */
-
-    public static CourseAddFragment newInstance(String courseID) {
-        CourseAddFragment fragment = new CourseAddFragment();
+    // TODO: Rename and change types and number of parameters
+    public static CourseEditFragment newInstance(String param1, String param2) {
+        CourseEditFragment fragment = new CourseEditFragment();
         Bundle args = new Bundle();
 
         fragment.setArguments(args);
@@ -67,9 +69,10 @@ public class CourseAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_course_add, container, false);
+        View v = inflater.inflate(R.layout.fragment_course_edit, container, false);
 
-        mCourseIdEditText = (EditText) v.findViewById(R.id.edit_courseid);
+        mCourseIdTextView = (TextView) v.findViewById(R.id.course_to_edit);
+        mCourseIdTextView.setText(getArguments().getString("courseToEdit"));
         mCourseShortDescEditText = (EditText) v.findViewById(R.id.edit_short_desc);
         mCourseLongDescEditText = (EditText) v.findViewById(R.id.edit_long_desc);
         mCoursePrereqsEditText = (EditText) v.findViewById(R.id.edit_prereqs);
@@ -77,12 +80,12 @@ public class CourseAddFragment extends Fragment {
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.hide();
 
-        Button addCourseButton = (Button) v.findViewById(R.id.btn_course);
-        addCourseButton.setOnClickListener(new View.OnClickListener() {
+        Button editCourseButton = (Button) v.findViewById(R.id.btn_submit);
+        editCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String url = buildCourseURL(v);
-                mListener.addCourse(url);
+                mListener.editCourse(url);
             }
         });
 
@@ -91,18 +94,15 @@ public class CourseAddFragment extends Fragment {
     }
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        super.onAttach(context);
-        if (context instanceof CourseAddListener) {
-            mListener = (CourseAddListener) context;
+        if (context instanceof CourseEditListener) {
+            mListener = (CourseEditListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement CourseAddListener");
+                    + " must implement CourseEditListener");
         }
-
     }
 
     @Override
@@ -110,14 +110,13 @@ public class CourseAddFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     private String buildCourseURL(View v) {
 
-        StringBuilder sb = new StringBuilder(COURSE_ADD_URL);
+        StringBuilder sb = new StringBuilder(COURSE_EDIT_URL);
 
         try {
 
-            String courseId = mCourseIdEditText.getText().toString();
+            String courseId = mCourseIdTextView.getText().toString();
             sb.append("id=");
             sb.append(URLEncoder.encode(courseId, "UTF-8"));
 
@@ -142,10 +141,8 @@ public class CourseAddFragment extends Fragment {
             Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
                     .show();
         }
-        Log.v(COURSE_ADD_DEBUG, sb.toString());
         return sb.toString();
     }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -157,10 +154,10 @@ public class CourseAddFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
+
         void onFragmentInteraction(Uri uri);
     }
-
-    public interface CourseAddListener {
-        public void addCourse(String url);
+    public interface CourseEditListener {
+        public void editCourse(String url);
     }
 }

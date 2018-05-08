@@ -10,4 +10,6 @@
     <string name="enter_prereqs">Enter Prerequisites</string>
     <string name="btn_add_course">ADD COURSE</string>
     <string name="btn_clear">CLEAR</string>
+    <string name="btn_edit_course">EDIT COURSE</string>
+    <string name="btn_submit">SUBMIT</string>
 </resources>

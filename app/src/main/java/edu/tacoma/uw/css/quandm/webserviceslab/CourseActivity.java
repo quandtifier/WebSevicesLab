@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,8 @@ import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 public class CourseActivity extends AppCompatActivity implements
         CourseListFragment.OnListFragmentInteractionListener,
         CourseDetailFragment.OnFragmentInteractionListener,
-        CourseAddFragment.CourseAddListener {
+        CourseAddFragment.CourseAddListener,
+        CourseEditFragment.CourseEditListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +101,33 @@ public class CourseActivity extends AppCompatActivity implements
 
     }
 
+    public void onSelectedEditCourse(String courseId) {
+        Log.v("CouseActivity", "in ONselectedEdit");
+        CourseEditFragment courseEditFragment = new CourseEditFragment();
+        Bundle args = new Bundle();
+        args.putString("courseToEdit", courseId);
+        courseEditFragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, courseEditFragment)
+                .addToBackStack(null)
+                .commit();
+        Log.v("CouseActivity", "in ONselectedEdit22");
+    }
     @Override
     public void addCourse(String url) {
 
         AddCourseTask task = new AddCourseTask();
+        task.execute(new String[]{url.toString()});
+
+
+        // Takes you back to the previous fragment by popping the current fragment out.
+        getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    @Override
+    public void editCourse(String url) {
+
+        EditCourseTask task = new EditCourseTask();
         task.execute(new String[]{url.toString()});
 
 
@@ -176,4 +201,71 @@ public class CourseActivity extends AppCompatActivity implements
             }
         }
     }
+    private class EditCourseTask extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to edit course, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+
+            }
+            return response;
+        }
+
+        /**
+         * It checks to see if there was a problem with the URL(Network) which is when an
+         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
+         * If not, it displays the exception.
+         *
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result) {
+            // Something wrong with the network or the URL.
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String status = (String) jsonObject.get("result");
+                if (status.equals("success")) {
+                    Toast.makeText(getApplicationContext(), "Course successfully added!"
+                            , Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to add: "
+                                    + jsonObject.get("error")
+                            , Toast.LENGTH_LONG)
+                            .show();
+                }
+            } catch (JSONException e) {
+                Toast.makeText(getApplicationContext(), "Something wrong with the data" +
+                        e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 }
