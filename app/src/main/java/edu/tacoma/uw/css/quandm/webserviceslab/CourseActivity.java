@@ -76,12 +76,15 @@ public class CourseActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_about) {
+            Toast.makeText(this, "Showing courses in CSS", Toast.LENGTH_SHORT)
+                    .show();
         }
+
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onListFragmentInteraction(Course item) {
@@ -134,6 +137,7 @@ public class CourseActivity extends AppCompatActivity implements
         // Takes you back to the previous fragment by popping the current fragment out.
         getSupportFragmentManager().popBackStackImmediate();
     }
+
 
     private class AddCourseTask extends AsyncTask<String, Void, String> {
 
